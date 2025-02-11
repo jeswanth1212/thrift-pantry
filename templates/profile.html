@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Profile</title>
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/css/styles.css') }}">
+    <style>
+        
+        .profile-container {
+            background-color: var(--body-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 40px 40px;
+            padding: 30px;
+            max-width: 100%;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-header h1 {
+            color: var(--title-color);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .profile-header p {
+            color: var(--title-color);
+            font-size: 1.2em;
+        }
+
+        .profile-details, .verification-section, .menu-section {
+            background-color: var(--container-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .profile-details h2, .verification-section h2, .menu-section h2 {
+            color: var(--title-color);
+            margin-bottom: 15px;
+        }
+
+        .profile-details p, .verification-section p {
+            margin: 10px 0;
+        }
+
+        .menu-item {
+            background-color: var(--container-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item h3 {
+            color: var(--title-color);
+        }
+
+        .menu-item .price {
+            color: var(--title-color);
+            font-weight: bold;
+        }
+        
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#" class="scrolltop" id="scroll-top">
+        <i class='bx bx-chevron-up scrolltop__icon'></i>
+    </a>
+    <header class="l-header" id="header">
+        <nav class="nav bd-container">
+            <a href="#" class="nav__logo"><h1>Thrift Pantry</h1></a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="{{ url_for('home_page') }}" class="nav__link active-link">Discover</a></li>
+                    <li class="nav__item"><a href="{{ url_for('menu_page') }}" class="nav__link">Browse</a></li>
+                    <li class="nav__item"><a href="#services" class="nav__link">Delivery</a></li>
+                    {% if current_user.is_authenticated %}
+                    <li class="nav__item"><a href="{{ url_for('logout') }}" class="nav__link">Sign Out</a></li>
+                    <li class="nav__item"><a href="{{ url_for('profile_page') }}" class="nav__link">Profile</a></li>
+                    {% else %}
+                    <li class="nav__item"><a href="{{ url_for('login_page') }}" class="nav__link">Sign Up</a></li>
+                    <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+                    {% endif %}
+                    <li><i class='bx bx-moon change-theme' id="theme-button"></i></li>
+                </ul>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="profile-container">
+            <div class="profile-header">
+                <h1>{{ current_user.storename }}</h1>
+                <p>{{ current_user.store_type }}</p>
+            </div>
+
+            <div class="profile-details">
+                <h2>Store Details</h2>
+                <p><strong>Address:</strong>{{ current_user.address }}</p>
+                <p><strong>Phone Number:</strong>{{ current_user.phone_number }}</p>
+                <p><strong>Store Type:</strong> Sustainable Restaurant</p>
+            </div>
+
+            <div class="verification-section">
+                <h2>Verification Details</h2>
+                <p><strong>FSSAI License:</strong> 12345678901234</p>
+                <p><strong>PAN Card Number:</strong> ABCDE1234F</p>
+            </div>
+
+            <div class="menu-section">
+                <h2>Our Menu</h2>
+                <div class="menu-item">
+                    <h3>Green Goddess Bowl</h3>
+                    <span class="price">₹250</span>
+                </div>
+                <div class="menu-item">
+                    <h3>Sustainable Sushi Roll</h3>
+                    <span class="price">₹300</span>
+                </div>
+                <div class="menu-item">
+                    <h3>Zero-Waste Zucchini Pasta</h3>
+                    <span class="price">₹200</span>
+                </div>
+                <div class="menu-item">
+                    <h3>Rescued Vegetable Curry</h3>
+                    <span class="price">₹180</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer section bd-container">
+        <div class="footer__container bd-grid">
+            <div class="footer__content">
+                <a href="#" class="footer__logo">Thrift Pantry</a>
+                <span class="footer__description">Sustainable</span>
+                <div>
+                    <a href="#" class="footer__social"><i class='bx bxl-facebook'></i></a>
+                    <a href="#" class="footer__social"><i class='bx bxl-instagram'></i></a>
+                    <a href="#" class="footer__social"><i class='bx bxl-twitter'></i></a>
+                </div>
+            </div>
+            <div class="footer__content">
+                <h3 class="footer__title">Services</h3>
+                <ul>
+                    <li><a href="menu.html" class="footer__link">Browse</a></li>
+                    <li><a href="menu.html" class="footer__link">Order Food</a></li>
+                    <li><a href="#" class="footer__link">Delivery</a></li>
+                </ul>
+            </div>
+            <div class="footer__content">
+                <h3 class="footer__title">Information</h3>
+                <ul>
+                    <li><a href="#" class="footer__link">Event</a></li>
+                    <li><a href="#" class="footer__link">Contact us</a></li>
+                    <li><a href="#" class="footer__link">Privacy policy</a></li>
+                    <li><a href="#" class="footer__link">Terms of services</a></li>
+                </ul>
+            </div>
+            <div class="footer__content">
+                <h3 class="footer__title">Address</h3>
+                <ul>
+                    <li>Chennai, Tamil Nadu</li>
+                    <li>031-4281-7093</li>
+                    <li>chipnxv@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <p class="footer__copy">&#169; 2024. All rights reserved</p>
+    </footer>
+
+    <div class="loader-container">
+        <img src="/static/styles/img/loader.gif" alt="">
+    </div> 
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="/static/styles/js/main.js"></script>
+</body>
+</html>
