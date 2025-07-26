@@ -15,6 +15,3 @@ Thrift Pantry is a food waste reduction platform built for **IEEE YESIST'12 2024
 - **IEEE YESIST'12 2024 World Finalist**: Recognized for innovative food waste solution.
 - **Impact**: Reduced food waste by 25% in tests with 150+ users, processing 500+ daily transactions.
 
-## 📜 License
-
-MIT License. See LICENSE for details.
